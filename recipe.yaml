@@ -1,0 +1,93 @@
+$engine: 3
+$onesync: on
+$minFxVersion: 7290
+name: ND_Core
+description: The official recipe for ND_Core.
+author: Andyyy and Willow-6855
+
+tasks: 
+  #  Download Base Files
+  - action: download_github
+    src: https://github.com/ND-Framework/txadmin-recipe
+    ref: main
+    dest: ./tmp/
+
+  - action: move_path
+    src: ./tmp/server.cfg
+    dest: ./server.cfg
+
+  - action: move_path
+    src: ./tmp/logo.png
+    dest: ./logo.png
+
+  # Prepare Database
+  - action: connect_database
+  - action: query_database
+    file: ./tmp/characters.sql
+    
+  - action: query_database
+    file: ./tmp/vehicles.sql
+
+  # Download default CFX resources
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
+    ref: master
+    subpath: resources
+    dest: ./resources/[default]
+    
+  # Download Resources
+  - action: download_file
+    url: https://github.com/ND-Framework/ND_Core/releases/download/v2.1.1/ND_Core.zip
+    path: ./tmp/ND_core.zip
+  - action: unzip
+    src: ./tmp/ND_core.zip
+    dest: ./resources/[nd]
+
+  - action: download_file
+    url: https://github.com/ND-Framework/ND_Dealership/releases/download/v2.0.1/ND_Dealership.zip
+    path: ./tmp/ND_Dealership.zip
+  - action: unzip
+    src: ./tmp/ND_Dealership.zip
+    dest: ./resources/[nd]
+    ###
+  - action: download_file
+    url: https://github.com/ND-Framework/ND_Nitro/releases/download/v2.0.1/ND_Nitro.zip
+    path: ./tmp/ND_Nitro.zip
+  - action: unzip
+    src: ./tmp/ND_Nitro.zip
+    dest: ./resources/[nd]
+    
+  - action: download_file
+    url: https://github.com/ND-Framework/ND_Characters/releases/download/v2.1.2/ND_Characters.zip
+    path: ./tmp/ND_Characters.zip
+  - action: unzip
+    src: ./tmp/ND_Characters.zip
+    dest: ./resources/[nd]
+
+  - action: download_file
+    url: https://github.com/ND-Framework/ND_Status/releases/download/v1/ND_Status.zip
+    path: ./tmp/ND_Status.zip
+  - action: unzip
+    src: ./tmp/ND_Status.zip
+    dest: ./resources/[nd]
+    
+  - action: download_file
+    url: https://github.com/ND-Framework/ND_Banking/releases/download/v2.0.0/ND_Banking.zip
+    path: ./tmp/ND_Banking.zip
+  - action: unzip
+    src: ./tmp/ND_Banking.zip
+    dest: ./resources/[nd]
+
+  - action: download_file
+    url: https://github.com/overextended/ox_lib/releases/download/v3.15.1/ox_lib.zip
+    path: ./tmp/ox_lib.zip
+  - action: unzip
+    src: ./tmp/ox_lib.zip
+    dest: ./resources/[ox]
+
+  - action: download_file
+    url: https://github.com/overextended/oxmysql/releases/download/v2.7.7/oxmysql.zip
+    path: ./tmp/oxmysql.zip
+  - action: unzip
+    src: ./tmp/oxmysql.zip
+    dest: ./resources/[ox]
