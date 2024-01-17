@@ -8,7 +8,7 @@ author: Andyyy and Willow-6855
 tasks: 
   #  Download Base Files
   - action: download_github
-    src: https://github.com/ND-Framework/txadmin-recipe
+    src: https://github.com/Willow-6855/ndcore-recipe
     ref: main
     dest: ./tmp/
 
